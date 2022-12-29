@@ -68,6 +68,10 @@ export interface BroadcastTransactionRequest {
     amount: number;
     feeRate?: number;
 }
+export interface DrainWalletRequest {
+    address: string;
+    feeRate?: number;
+}
 export interface ConfirmedTransaction {
     txid: string;
     block_timestamp: number;

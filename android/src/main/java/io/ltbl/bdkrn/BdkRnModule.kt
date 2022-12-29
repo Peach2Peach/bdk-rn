@@ -108,6 +108,16 @@ class BdkRnModule(reactContext: ReactApplicationContext) :
     }
 
     @ReactMethod
+    fun drainWallet(recipient: String, feeRate: Double?, result: Promise) {
+        try {
+            val transaction: String = BdkFunctions.drainWallet(recipient, feeRate)
+            result.resolve(transaction)
+        } catch (error: Throwable) {
+            return result.reject("Drain Wallet Error", error.message, error.cause)
+        }
+    }
+
+    @ReactMethod
     fun getPendingTransactions(result: Promise) {
         try {
             val transactions = BdkFunctions.pendingTransactionsList()

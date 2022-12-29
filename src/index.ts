@@ -9,6 +9,7 @@ import {
   CreateExtendedKeyResponse,
   createWalletRequest,
   createWalletResponse,
+  DrainWalletRequest,
   GenerateMnemonicRequest,
   PendingTransaction,
   TransactionsResponse,
@@ -235,6 +236,22 @@ class BdkInterface {
       if (isNaN(amount)) throw 'Entered amount is invalid';
       if (feeRate && isNaN(feeRate)) throw 'Entered feeRate is invalid';
       const tx = await this._bdk.broadcastTx(address, amount, feeRate);
+      return ok(tx);
+    } catch (e: any) {
+      return err(e);
+    }
+  }
+
+  /**
+   * Drain Wallet
+   * @return {Promise<Result<string>>}
+   */
+  async drainWallet(args: DrainWalletRequest): Promise<Result<string>> {
+    try {
+      const { address, feeRate } = args;
+      if (!_exists(address)) throw 'Required address parameters are missing.';
+      if (feeRate && isNaN(feeRate)) throw 'Entered feeRate is invalid';
+      const tx = await this._bdk.drainWallet(address, feeRate);
       return ok(tx);
     } catch (e: any) {
       return err(e);

@@ -224,5 +224,23 @@ class BdkFunctions: NSObject {
             throw error
         }
     }
+
+    func drainWallet(_ recipient: String, feeRate: NSNumber?) throws -> String {
+        do {
+            let txBuilder = TxBuilder()
+            if feeRate != nil {
+                txBuilder.feeRate(feeRate)
+            }
+            txBuilder.drainWallet().drainTo(recipient)
+
+            let psbt = try txBuilder.finish(wallet: wallet)
+            try wallet.sign(psbt: psbt)
+            try blockChain.broadcast(psbt: psbt)
+            let txid = psbt.txid()
+            return txid;
+        } catch {
+            throw error
+        }
+    }
 }
 

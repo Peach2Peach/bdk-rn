@@ -1,5 +1,5 @@
 import { Result } from '@synonymdev/result';
-import { BroadcastTransactionRequest, ConfirmedTransaction, CreateDescriptorRequest, CreateExtendedKeyRequest, createWalletRequest, createWalletResponse, GenerateMnemonicRequest, PendingTransaction, TransactionsResponse } from './lib/interfaces';
+import { BroadcastTransactionRequest, ConfirmedTransaction, CreateDescriptorRequest, CreateExtendedKeyRequest, createWalletRequest, createWalletResponse, DrainWalletRequest, GenerateMnemonicRequest, PendingTransaction, TransactionsResponse } from './lib/interfaces';
 declare class BdkInterface {
     _bdk: any;
     constructor();
@@ -48,6 +48,11 @@ declare class BdkInterface {
      * @return {Promise<Result<string>>}
      */
     broadcastTx(args: BroadcastTransactionRequest): Promise<Result<string>>;
+    /**
+     * Drain Wallet
+     * @return {Promise<Result<string>>}
+     */
+    drainWallet(args: DrainWalletRequest): Promise<Result<string>>;
     /**
      * Get pending transactions
      * @return {Promise<Result<Array<PendingTransaction>>>}

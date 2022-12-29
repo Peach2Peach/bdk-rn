@@ -239,6 +239,21 @@ const response = await BdkRn.broadcastTx({ address, amount, feeRate });
 
 ---
 
+### drainWallet()
+
+Used to send all sats to given address.
+
+Required params: address
+Optional params: feeRate
+```js
+let address: string = 'tb1qhmk3ftsyctxf2st2fwnprwc0gl708f685t0j3t'; // Wallet address
+let feeRate: number = 1; // amount in satoshis
+const response = await BdkRn.drainWallet({ address, feeRate });
+// 1162badd3d98b97b1c6bb7fc160b7789163c0fcaef99ad841ad8febeb1395864
+```
+
+---
+
 ### getPendingTransactions()
 
 Get pending transactions

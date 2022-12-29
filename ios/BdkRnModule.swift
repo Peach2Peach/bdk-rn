@@ -126,7 +126,23 @@ class BdkRnModule: NSObject {
             reject("Broadcast Error", details, error)
         }
     }
-    
+
+    @objc
+    func drainWallet(_
+        recipient: String,
+        feeRate: NSNumber?,
+        resolve: @escaping RCTPromiseResolveBlock,
+        reject: @escaping RCTPromiseRejectBlock
+    ) {
+        do {
+            let responseObject = try bdkFunctions.drainWallet(recipient, feeRate: feeRate)
+            resolve(responseObject)
+        } catch let error {
+            let details = "\(error)"
+            reject("Drain Wallet Error", details, error)
+        }
+    }
+
     @objc
     func getLastUnusedAddress(_
                               resolve: @escaping RCTPromiseResolveBlock,

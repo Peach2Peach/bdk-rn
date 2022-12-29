@@ -125,6 +125,21 @@ object BdkFunctions {
         }
     }
 
+    fun drainWallet(recipient: String, feeRate: Double?): String {
+        try {
+            val txBuilder = TxBuilder().addRecipient(recipient, longAmt.toULong())
+            if (feeRate != null) txBuilder.feeRate(feeRate)
+            txBuilder.drainWallet().drainTo(recipient)
+
+            val psbt = txBuilder.finish(wallet)
+            wallet.sign(psbt)
+            blockChain.broadcast(psbt)
+            return (psbt.txid())
+        } catch (error: Throwable) {
+            throw(error)
+        }
+    }
+
     // retrieve transactions for an address
     fun pendingTransactionsList(): List<Map<String, Any?>> {
         try {

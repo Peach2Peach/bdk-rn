@@ -49,6 +49,13 @@ RCT_EXTERN_METHOD(
                   reject:(RCTPromiseRejectBlock)reject
                   )
 
+RCT_EXTERN_METHOD(
+                  drainWallet: (nonnull NSString *)recipient
+                  feeRate: (nullable NSNumber *)feeRate
+                  resolve: (RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject
+                  )
+
 RCT_EXTERN_METHOD(getPendingTransactions:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
 RCT_EXTERN_METHOD(getConfirmedTransactions:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
 @end
