@@ -208,9 +208,13 @@ class BdkFunctions: NSObject {
     }
 
 
-    func broadcastTx(_ recipient: String, amount: NSNumber) throws -> String {
+    func broadcastTx(_ recipient: String, amount: NSNumber, feeRate: NSNumber?) throws -> String {
         do {
             let txBuilder = TxBuilder().addRecipient(address: recipient, amount: UInt64(truncating: amount))
+            if feeRate != nil {
+                txBuilder.feeRate(feeRate)
+            }
+
             let psbt = try txBuilder.finish(wallet: wallet)
             try wallet.sign(psbt: psbt)
             try blockChain.broadcast(psbt: psbt)

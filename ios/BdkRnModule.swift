@@ -114,11 +114,12 @@ class BdkRnModule: NSObject {
     func broadcastTx(_
         recipient: String,
         amount: NSNumber,
+        feeRate: NSNumber?,
         resolve: @escaping RCTPromiseResolveBlock,
         reject: @escaping RCTPromiseRejectBlock
     ) {
         do {
-            let responseObject = try bdkFunctions.broadcastTx(recipient, amount: amount)
+            let responseObject = try bdkFunctions.broadcastTx(recipient, amount: amount, feeRate: feeRate)
             resolve(responseObject)
         } catch let error {
             let details = "\(error)"

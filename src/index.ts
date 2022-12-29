@@ -230,10 +230,11 @@ class BdkInterface {
    */
   async broadcastTx(args: BroadcastTransactionRequest): Promise<Result<string>> {
     try {
-      const { address, amount } = args;
+      const { address, amount, feeRate } = args;
       if (!_exists(address) || !_exists(amount)) throw 'Required address or amount parameters are missing.';
       if (isNaN(amount)) throw 'Entered amount is invalid';
-      const tx = await this._bdk.broadcastTx(address, amount);
+      if (feeRate && isNaN(feeRate)) throw 'Entered feeRate is invalid';
+      const tx = await this._bdk.broadcastTx(address, amount, feeRate);
       return ok(tx);
     } catch (e: any) {
       return err(e);

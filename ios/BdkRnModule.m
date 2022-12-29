@@ -44,6 +44,7 @@ RCT_EXTERN_METHOD(
 RCT_EXTERN_METHOD(
                   broadcastTx: (nonnull NSString *)recipient
                   amount: (nonnull NSNumber *)amount
+                  feeRate: (nullable NSNumber *)feeRate
                   resolve: (RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject
                   )

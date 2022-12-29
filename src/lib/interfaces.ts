@@ -78,6 +78,7 @@ export interface createWalletResponse {
 export interface BroadcastTransactionRequest {
   address: string;
   amount: number;
+  feeRate?: number;
 }
 
 export interface ConfirmedTransaction {

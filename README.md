@@ -228,11 +228,12 @@ const response = await BdkRn.getBalance();
 Used to send sats to given address.
 
 Required params: address, amount
-
+Optional params: feeRate
 ```js
 let address: string = 'tb1qhmk3ftsyctxf2st2fwnprwc0gl708f685t0j3t'; // Wallet address
 let amount: number = 2000; // amount in satoshis
-const response = await BdkRn.broadcastTx({ address, amount });
+let feeRate: number = 1; // amount in satoshis
+const response = await BdkRn.broadcastTx({ address, amount, feeRate });
 // 1162badd3d98b97b1c6bb7fc160b7789163c0fcaef99ad841ad8febeb1395864
 ```
 

@@ -111,11 +111,11 @@ object BdkFunctions {
         }
     }
 
-    fun broadcastTx(recipient: String, amount: Double): String {
+    fun broadcastTx(recipient: String, amount: Double, feeRate: Double?): String {
         try {
-
             val longAmt: Long = amount.toLong()
             val txBuilder = TxBuilder().addRecipient(recipient, longAmt.toULong())
+            if (feeRate != null) txBuilder.feeRate(feeRate)
             val psbt = txBuilder.finish(wallet)
             wallet.sign(psbt)
             blockChain.broadcast(psbt)

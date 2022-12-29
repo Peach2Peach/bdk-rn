@@ -98,9 +98,9 @@ class BdkRnModule(reactContext: ReactApplicationContext) :
 
 
     @ReactMethod
-    fun broadcastTx(recipient: String, amount: Double, result: Promise) {
+    fun broadcastTx(recipient: String, amount: Double, feeRate: Double?, result: Promise) {
         try {
-            val transaction: String = BdkFunctions.broadcastTx(recipient, amount)
+            val transaction: String = BdkFunctions.broadcastTx(recipient, amount, feeRate)
             result.resolve(transaction)
         } catch (error: Throwable) {
             return result.reject("Broadcast Transaction Error", error.message, error.cause)
