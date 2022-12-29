@@ -211,8 +211,8 @@ class BdkFunctions: NSObject {
     func broadcastTx(_ recipient: String, amount: NSNumber, feeRate: NSNumber?) throws -> String {
         do {
             let txBuilder = TxBuilder().addRecipient(address: recipient, amount: UInt64(truncating: amount))
-            if feeRate != nil {
-                txBuilder.feeRate(feeRate)
+            if let feeRate = feeRate {
+                txBuilder.feeRate(satPerVbyte: feeRate.floatValue)
             }
 
             let psbt = try txBuilder.finish(wallet: wallet)
@@ -228,10 +228,10 @@ class BdkFunctions: NSObject {
     func drainWallet(_ recipient: String, feeRate: NSNumber?) throws -> String {
         do {
             let txBuilder = TxBuilder()
-            if feeRate != nil {
-                txBuilder.feeRate(feeRate)
+            txBuilder.drainWallet().drainTo(address: recipient)
+            if let feeRate = feeRate {
+                txBuilder.feeRate(satPerVbyte: feeRate.floatValue)
             }
-            txBuilder.drainWallet().drainTo(recipient)
 
             let psbt = try txBuilder.finish(wallet: wallet)
             try wallet.sign(psbt: psbt)
@@ -243,4 +243,3 @@ class BdkFunctions: NSObject {
         }
     }
 }
-

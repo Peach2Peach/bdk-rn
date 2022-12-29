@@ -111,7 +111,7 @@ object BdkFunctions {
         }
     }
 
-    fun broadcastTx(recipient: String, amount: Double, feeRate: Double?): String {
+    fun broadcastTx(recipient: String, amount: Double, feeRate: Float?): String {
         try {
             val longAmt: Long = amount.toLong()
             val txBuilder = TxBuilder().addRecipient(recipient, longAmt.toULong())
@@ -125,7 +125,7 @@ object BdkFunctions {
         }
     }
 
-    fun drainWallet(recipient: String, feeRate: Double?): String {
+    fun drainWallet(recipient: String, feeRate: Float?): String {
         try {
             val txBuilder = TxBuilder().addRecipient(recipient, longAmt.toULong())
             if (feeRate != null) txBuilder.feeRate(feeRate)

@@ -98,7 +98,7 @@ class BdkRnModule(reactContext: ReactApplicationContext) :
 
 
     @ReactMethod
-    fun broadcastTx(recipient: String, amount: Double, feeRate: Double?, result: Promise) {
+    fun broadcastTx(recipient: String, amount: Double, feeRate: Float?, result: Promise) {
         try {
             val transaction: String = BdkFunctions.broadcastTx(recipient, amount, feeRate)
             result.resolve(transaction)
@@ -108,7 +108,7 @@ class BdkRnModule(reactContext: ReactApplicationContext) :
     }
 
     @ReactMethod
-    fun drainWallet(recipient: String, feeRate: Double?, result: Promise) {
+    fun drainWallet(recipient: String, feeRate: Float?, result: Promise) {
         try {
             val transaction: String = BdkFunctions.drainWallet(recipient, feeRate)
             result.resolve(transaction)
