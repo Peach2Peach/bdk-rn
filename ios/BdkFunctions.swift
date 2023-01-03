@@ -229,7 +229,7 @@ class BdkFunctions: NSObject {
             let txBuilder = TxBuilder()
             txBuilder
                 .drainWallet()
-                .setSingleRecipient(recipient: recipient)
+                .setSingleRecipient(address: recipient)
                 .feeRate(satPerVbyte: feeRate.floatValue)
 
             let psbt = try txBuilder.finish(wallet: wallet)
