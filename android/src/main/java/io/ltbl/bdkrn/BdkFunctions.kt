@@ -111,12 +111,14 @@ object BdkFunctions {
         }
     }
 
-    fun broadcastTx(recipient: String, amount: Double, feeRate: Float?): String {
+    fun broadcastTx(recipient: String, amount: Double, feeRate: Float): String {
         try {
             val longAmt: Long = amount.toLong()
-            val txBuilder = TxBuilder().addRecipient(recipient, longAmt.toULong())
-            if (feeRate != null) txBuilder.feeRate(feeRate)
-            val psbt = txBuilder.finish(wallet)
+            val psbt = TxBuilder()
+                .addRecipient(recipient, longAmt.toULong())
+                .feeRate(feeRate)
+                .finish(wallet)
+
             wallet.sign(psbt)
             blockChain.broadcast(psbt)
             return (psbt.txid())
@@ -125,13 +127,14 @@ object BdkFunctions {
         }
     }
 
-    fun drainWallet(recipient: String, feeRate: Float?): String {
+    fun drainWallet(recipient: String, feeRate: Float): String {
         try {
-            val txBuilder = TxBuilder().addRecipient(recipient, longAmt.toULong())
-            if (feeRate != null) txBuilder.feeRate(feeRate)
-            txBuilder.drainWallet().drainTo(recipient)
+            val psbt = TxBuilder()
+                .feeRate(feeRate)
+                .drainWallet()
+                .setSingleRecipient(recipient)
+                .finish(wallet)
 
-            val psbt = txBuilder.finish(wallet)
             wallet.sign(psbt)
             blockChain.broadcast(psbt)
             return (psbt.txid())
