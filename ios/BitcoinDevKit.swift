@@ -1095,7 +1095,6 @@ extension PartiallySignedBitcoinTransaction : ViaFfi, Serializable {}
 
 public protocol TxBuilderProtocol {
     func addRecipient( address: String,  amount: UInt64 )  -> TxBuilder
-    func setSingleRecipient( address: String )  -> TxBuilder
     func feeRate( satPerVbyte: Float )  -> TxBuilder
     func drainWallet()  -> TxBuilder
     func drainTo( address: String )  -> TxBuilder
@@ -1136,16 +1135,6 @@ public class TxBuilder: TxBuilderProtocol {
     rustCall() {
     
     bdk_1c1_TxBuilder_add_recipient(self.pointer, address.lower(), amount.lower() , $0
-    )
-}
-        return try! TxBuilder.lift(_retval)
-    }
-
-    public func setSingleRecipient( address: String )  -> TxBuilder {
-        let _retval = try!
-    rustCall() {
-    
-    bdk_1c1_TxBuilder_set_single_recipient(self.pointer, address.lower() , $0
     )
 }
         return try! TxBuilder.lift(_retval)

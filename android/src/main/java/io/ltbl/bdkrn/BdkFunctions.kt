@@ -115,8 +115,8 @@ object BdkFunctions {
         try {
             val longAmt: Long = amount.toLong()
             val psbt = TxBuilder()
-                .addRecipient(recipient, longAmt.toULong())
                 .feeRate(feeRate)
+                .addRecipient(recipient, longAmt.toULong())
                 .finish(wallet)
 
             wallet.sign(psbt)
@@ -132,7 +132,7 @@ object BdkFunctions {
             val psbt = TxBuilder()
                 .feeRate(feeRate)
                 .drainWallet()
-                .setSingleRecipient(recipient)
+                .drainTo(recipient)
                 .finish(wallet)
 
             wallet.sign(psbt)
