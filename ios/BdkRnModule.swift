@@ -114,7 +114,7 @@ class BdkRnModule: NSObject {
     func broadcastTx(_
         recipient: String,
         amount: NSNumber,
-        feeRate: NSNumber? = nil,
+        feeRate: NSNumber,
         resolve: @escaping RCTPromiseResolveBlock,
         reject: @escaping RCTPromiseRejectBlock
     ) {
@@ -130,7 +130,7 @@ class BdkRnModule: NSObject {
     @objc
     func drainWallet(_
         recipient: String,
-        feeRate: NSNumber? = nil,
+        feeRate: NSNumber,
         resolve: @escaping RCTPromiseResolveBlock,
         reject: @escaping RCTPromiseRejectBlock
     ) {

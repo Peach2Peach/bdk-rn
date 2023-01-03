@@ -44,14 +44,14 @@ RCT_EXTERN_METHOD(
 RCT_EXTERN_METHOD(
                   broadcastTx: (nonnull NSString *)recipient
                   amount: (nonnull NSNumber *)amount
-                  feeRate: (nullable NSNumber *)feeRate
+                  feeRate: (nonnull NSNumber *)feeRate
                   resolve: (RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject
                   )
 
 RCT_EXTERN_METHOD(
                   drainWallet: (nonnull NSString *)recipient
-                  feeRate: (nullable NSNumber *)feeRate
+                  feeRate: (nonnull NSNumber *)feeRate
                   resolve: (RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject
                   )
