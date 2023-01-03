@@ -30,7 +30,8 @@ class BdkFunctions: NSObject {
 
 
     func syncWallet() {
-        try? self.wallet.sync(blockchain: Blockchain.init(config: blockchainConfig), progress: BdkProgress())
+        self.blockChain = try! Blockchain(config: self.blockchainConfig)
+        try? self.wallet.sync(blockchain: self.blockChain, progress: BdkProgress())
     }
 
     func setNetwork(networkStr: String?) -> Network {
@@ -118,7 +119,6 @@ class BdkFunctions: NSObject {
             let changeDescriptor: String = createChangeDescriptor(descriptor: newDescriptor)
 
             self.blockchainConfig = createBlockchainConfig(blockChainConfigUrl: blockChainConfigUrl, blockChainSocket5: blockChainSocket5, retry: retry, timeOut: timeOut, blockChainName: blockChainName != "" ? blockChainName : defaultBlockChain)
-
             self.wallet = try Wallet.init(
                 descriptor: newDescriptor,
                 changeDescriptor: changeDescriptor,
