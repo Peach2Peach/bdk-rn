@@ -12,7 +12,7 @@ object BdkFunctions {
     private val databaseConfig = DatabaseConfig.Memory
     val defaultBlockChainConfigUrl = "ssl://electrum.blockstream.info:60002"
     val defaultBlockChain = "ELECTRUM"
-    private var defaultBlockchainConfig =
+    private var defaultBlockchainConfig: BlockchainConfig =
         BlockchainConfig.Electrum(
             ElectrumConfig(defaultBlockChainConfigUrl, null, 5u, null, 10u)
         )
@@ -287,7 +287,8 @@ object BdkFunctions {
             updatedConfig = this.defaultBlockchainConfig
           }
         }
-        this.defaultBlockchainConfig = updatedConfig as BlockchainConfig.Electrum
+        
+        this.defaultBlockchainConfig = updatedConfig
       } catch (e: Throwable){
         throw e
       }
