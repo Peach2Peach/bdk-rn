@@ -29,18 +29,13 @@ android {
         minSdkVersion safeExtGet('minSdkVersion', 21)
         targetSdkVersion safeExtGet('targetSdkVersion', 30)
     }
-    
-    externalNativeBuild {
-        cmake {
-            arguments "-DCMAKE_ANDROID_PIE_PAGE_SIZE=16384"
-        }
-    }
-}
 
-android {
     externalNativeBuild {
         cmake {
             path "CMakeLists.txt"
+
+            // Correct syntax for newer AGP: append to the arguments list
+            arguments += ["-DCMAKE_ANDROID_PIE_PAGE_SIZE=16384"]
         }
     }
 }
