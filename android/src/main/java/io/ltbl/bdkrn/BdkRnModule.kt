@@ -412,7 +412,7 @@ class BdkRnModule(reactContext: ReactApplicationContext) :
                 val randomId = randomId()
 
                 var resolvedIndex: Any = "new"
-                when (val type = addressIndex.getType()) {
+                when (val type = addressIndex.type) {
                     ReadableType.String -> {
                         resolvedIndex = (addressIndex as Dynamic).asString() ?: "new"
                     }
@@ -445,7 +445,7 @@ class BdkRnModule(reactContext: ReactApplicationContext) :
             try {
                 val randomId = randomId()
                 var resolvedIndex: Any = "new"
-                when (val type = addressIndex.getType()) {
+                when (val type = addressIndex.type) {
                     ReadableType.String -> {
                         resolvedIndex = (addressIndex as Dynamic).asString() ?: "new"
                     }
